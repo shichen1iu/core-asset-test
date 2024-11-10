@@ -62,7 +62,6 @@ pub fn process_create(ctx: Context<CreateAsset>, args: CreateAssetArgs) -> Resul
         .plugins(plugins)
         .external_plugin_adapters(external_plugin_adapters)
         .invoke()?;
-
     Ok(())
 }
 

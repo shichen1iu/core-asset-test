@@ -14,10 +14,10 @@ describe("create-core-asset-example", () => {
   it("Create Asset", async () => {
     const asset = Keypair.generate();
     console.log(asset.publicKey.toBase58());
-    console.log(asset.publicKey);
+
     let createAssetArgs = {
       name: "Dwuw Avatar",
-      uri: "https://github.com/shichen1iu/core-asset-test/blob/main/my-uri.json",
+      uri: "https://gray-managing-penguin-864.mypinata.cloud/ipfs/QmT7FU5uT8gjSRZbZzhCTo862zKhWv13q8fmuJV1YafJi8",
     };
 
     const createAssetTx = await program.methods
@@ -33,6 +33,8 @@ describe("create-core-asset-example", () => {
       })
       .signers([asset, wallet.payer])
       .rpc();
+
+
     
     console.log(createAssetTx);
   });
