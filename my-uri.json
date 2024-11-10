@@ -1,35 +1,4 @@
 {
   "name": "Dwuw Avatar",
-  "description": "my avatar!!!!",
-  "image": "https://khst2q6ng5pl4x2mswe4igjuhsbp43firoj6ubr6eog25u2hmnda.arweave.net/UeU9Q803Xr5fTJWJxBk0PIL-bKiLk-oGPiONrtNHY0Y",
-  "animation_url": "",
-  "external_url": "",
-  "attributes": [
-    {
-      "trait_type": "trait1",
-      "value": "value1"
-    },
-    {
-      "trait_type": "trait2",
-      "value": "value2"
-    }
-  ],
-  "properties": {
-    "files": [
-      {
-        "uri": "https://www.arweave.net/abcd5678?ext=png",
-        "type": "image/png"
-      },
-      {
-        "uri": "https://watch.videodelivery.net/9876jkl",
-        "type": "unknown",
-        "cdn": true
-      },
-      {
-        "uri": "https://www.arweave.net/efgh1234?ext=mp4",
-        "type": "video/mp4"
-      }
-    ],
-    "category": "video"
-  }
+  "image": "https://khst2q6ng5pl4x2mswe4igjuhsbp43firoj6ubr6eog25u2hmnda.arweave.net/UeU9Q803Xr5fTJWJxBk0PIL-bKiLk-oGPiONrtNHY0Y"
 }

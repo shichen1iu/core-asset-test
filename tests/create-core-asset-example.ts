@@ -13,9 +13,11 @@ describe("create-core-asset-example", () => {
 
   it("Create Asset", async () => {
     const asset = Keypair.generate();
+    console.log(asset.publicKey.toBase58());
+    console.log(asset.publicKey);
     let createAssetArgs = {
-      name: "My Asset",
-      uri: "https://example.com/my-asset.json",
+      name: "Dwuw Avatar",
+      uri: "https://github.com/shichen1iu/core-asset-test/blob/main/my-uri.json",
     };
 
     const createAssetTx = await program.methods
