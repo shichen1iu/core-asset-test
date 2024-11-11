@@ -11,13 +11,13 @@ describe("create-core-asset-example", () => {
   const program = anchor.workspace
     .CreateCoreAssetExample as Program<CreateCoreAssetExample>;
 
-  it("Create Asset", async () => {
-    const asset = Keypair.generate();
-    console.log(asset.publicKey.toBase58());
+  const collection = Keypair.generate();
+  const asset = Keypair.generate();
 
+  it("Create Asset", async () => {
     let createAssetArgs = {
       name: "Dwuw Avatar",
-      uri: "https://gray-managing-penguin-864.mypinata.cloud/ipfs/QmT7FU5uT8gjSRZbZzhCTo862zKhWv13q8fmuJV1YafJi8",
+      uri: "https://gray-managing-penguin-864.mypinata.cloud/ipfs/QmRxeNPEdqWEN3pAKHLuFzaqvr3UJE5jnEzGeXWoQj5mYT",
     };
 
     const createAssetTx = await program.methods
@@ -34,8 +34,28 @@ describe("create-core-asset-example", () => {
       .signers([asset, wallet.payer])
       .rpc();
 
+    console.log("Asset Address: ", asset.publicKey.toBase58());
+    console.log("Create Asset TxHash : ", createAssetTx);
+  });
 
-    
-    console.log(createAssetTx);
+  it("Create Collection", async () => {
+    let createCollectionArgs = {
+      name: "My Collection",
+      uri: "https://gray-managing-penguin-864.mypinata.cloud/ipfs/QmZuUrZe6KrD1BnNHFPphBuHGUXTbxS4996TtSQjjSAFAD",
+    };
+
+    const createCollectionTx = await program.methods
+      .createCollection(createCollectionArgs)
+      .accountsPartial({
+        collection: collection.publicKey,
+        payer: wallet.publicKey,
+        updateAuthority: null,
+        mplCoreProgram: MPL_CORE_PROGRAM_ID,
+      })
+      .signers([collection, wallet.payer])
+      .rpc();
+
+    console.log("Collection Address: ", collection.publicKey.toBase58());
+    console.log("Create Collection TxHash : ", createCollectionTx);
   });
 });

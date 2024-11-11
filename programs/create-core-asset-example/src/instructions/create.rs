@@ -11,6 +11,25 @@ pub struct CreateAssetArgs {
     uri: String,
 }
 
+#[derive(Accounts)]
+pub struct CreateAsset<'info> {
+    #[account(mut)]
+    pub asset: Signer<'info>,
+    #[account(mut)]
+    pub collection: Option<Account<'info, BaseCollectionV1>>,
+    pub authority: Option<Signer<'info>>,
+    #[account(mut)]
+    pub payer: Signer<'info>,
+    /// CHECK: this account will be checked by the mpl_core program
+    pub owner: Option<UncheckedAccount<'info>>,
+    /// CHECK: this account will be checked by the mpl_core program
+    pub update_authority: Option<UncheckedAccount<'info>>,
+    pub system_program: Program<'info, System>,
+    #[account(address = MPL_CORE_ID)]
+    /// CHECK: this account is checked by the address constraint
+    pub mpl_core_program: UncheckedAccount<'info>,
+}
+
 pub fn process_create(ctx: Context<CreateAsset>, args: CreateAssetArgs) -> Result<()> {
     let collection = match &ctx.accounts.collection {
         Some(collection) => Some(collection.to_account_info()),
@@ -63,23 +82,4 @@ pub fn process_create(ctx: Context<CreateAsset>, args: CreateAssetArgs) -> Resul
         .external_plugin_adapters(external_plugin_adapters)
         .invoke()?;
     Ok(())
-}
-
-#[derive(Accounts)]
-pub struct CreateAsset<'info> {
-    #[account(mut)]
-    pub asset: Signer<'info>,
-    #[account(mut)]
-    pub collection: Option<Account<'info, BaseCollectionV1>>,
-    pub authority: Option<Signer<'info>>,
-    #[account(mut)]
-    pub payer: Signer<'info>,
-    /// CHECK: this account will be checked by the mpl_core program
-    pub owner: Option<UncheckedAccount<'info>>,
-    /// CHECK: this account will be checked by the mpl_core program
-    pub update_authority: Option<UncheckedAccount<'info>>,
-    pub system_program: Program<'info, System>,
-    #[account(address = MPL_CORE_ID)]
-    /// CHECK: this account is checked by the address constraint
-    pub mpl_core_program: UncheckedAccount<'info>,
 }
